@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>웹 기반 계산기</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #calculator {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 18px;
+      cursor: pointer;
+      border: 1px solid #61dafb;
+      background-color: #61dafb;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    #result {
+      grid-column: span 2;
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      padding-right: 10px;
+      border: 1px solid #61dafb;
+      height: 45px;
+      line-height: 45px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="calculator">
+  <div>
+    <label for="thickness">두께</label>
+    <input type="number" id="thickness" placeholder="두께를 입력하세요">
+    
+    <label for="length">길이</label>
+    <input type="number" id="length" placeholder="길이를 입력하세요">
+
+    <label for="width">폭</label>
+    <input type="number" id="width" placeholder="폭을 입력하세요">
+  </div>
+
+  <div>
+    <label for="companyPercentage">업체%</label>
+    <input type="number" id="companyPercentage" placeholder="업체%를 입력하세요">
+    
+    <label for="printingCost">인쇄비</label>
+    <input type="number" id="printingCost" placeholder="인쇄비를 입력하세요">
+
+    <label for="processingCost">가공비</label>
+    <input type="number" id="processingCost" placeholder="가공비를 입력하세요">
+  </div>
+
+  <button onclick="calculate()">계산</button>
+
+  <div id="result">결과 값</div>
+</div>
+
+<script>
+  function calculate() {
+    var thickness = parseFloat(document.getElementById('thickness').value) || 0;
+    var length = parseFloat(document.getElementById('length').value) || 0;
+    var width = parseFloat(document.getElementById('width').value) || 0;
+    var companyPercentage = parseFloat(document.getElementById('companyPercentage').value) || 0;
+    var printingCost = parseFloat(document.getElementById('printingCost').value) || 0;
+    var processingCost = parseFloat(document.getElementById('processingCost').value) || 0;
+
+    var result = (((thickness * (width + 2) * 40.1 * (companyPercentage / 100) + printingCost) / 457) * (length / 100) + (processingCost * length));
+
+    document.getElementById('result').innerText = '계산 결과: ' + result.toFixed(2);
+  }
+</script>
+
+</body>
+</html>
